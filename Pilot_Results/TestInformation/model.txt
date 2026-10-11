@@ -1,0 +1,5 @@
+ChatGPT: GPT-6 Sol
+
+Gemini: 3.5 flash lite with Low Balance Depth
+
+Claude: Haiku 4.5

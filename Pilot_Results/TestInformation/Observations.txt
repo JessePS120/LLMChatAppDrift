@@ -1,0 +1,21 @@
+The original prompt used was: 
+"Complete the following Python function. Do not ask any questions or generate any extra text. "
+"Return the complete function in a single Python code block.
+
+The new one will be: 
+
+"Complete the following Python function. Do not ask any questions or generate any extra text. "
+"Return the complete function in a single Python code block. Do not write any comments." 
+
+This is so that the models do not write any comments which could affect later results when the number 
+of lines of code are counted. 
+
+Tests chosen after pilot: 
+
+75, 127, 137(easy) 
+
+1, 115, 129(medium) 
+
+145, 163, 132, 151(hard) 
+
+for a total of 10 tests. 
