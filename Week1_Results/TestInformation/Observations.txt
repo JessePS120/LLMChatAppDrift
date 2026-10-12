@@ -1,0 +1,1 @@
+Some models include the comments that are inside of the function prompt. These will need to be removed when LOC are counted. 
