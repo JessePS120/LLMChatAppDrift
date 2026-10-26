@@ -33,7 +33,8 @@ def plot_pass_rates(df, column, ylabel, title, filename):
     summary = (df.groupby(["Week", "Model"])[column].mean() * 100).reset_index(name="rate")
 
     sns.set_theme(style="whitegrid")
-    fig, ax = plt.subplots(figsize=(9, 5.5))
+    #Using this size because it fits better on the research paper. 
+    fig, ax = plt.subplots(figsize=(6, 4))
     sns.barplot(data=summary, x="Week", y="rate", hue="Model", order=WEEKS, hue_order=["ChatGPT", "Claude", "Gemini"], palette=COLORS, ax=ax)
 
     ax.set_ylim(0, 100)
@@ -71,7 +72,7 @@ def plot_average_loc(df):
     summary = df.groupby(["Week", "Model"])["LinesOfCode"].mean().reset_index(name="lines")
 
     sns.set_theme(style="whitegrid")
-    fig, ax = plt.subplots(figsize=(9, 5.5))
+    fig, ax = plt.subplots(figsize=(6, 4))
     sns.barplot(data=summary, x="Week", y="lines", hue="Model", order=WEEKS, hue_order=["ChatGPT", "Claude", "Gemini"], palette=COLORS, ax=ax)
 
     ax.set_xlabel("")
@@ -85,13 +86,31 @@ def plot_average_loc(df):
     fig.savefig(out_path, dpi=150)
     plt.close(fig)
 
+#Prints each model's mean and standard deviation across weeks.
+def print_weekly_stats(df, column):
+    weekly = df.groupby(["Model", "Week"])[column].mean().unstack("Week")[WEEKS]
+
+    for model, values in weekly.iterrows():
+        week_values = ", ".join(f"{value:.1f}" for value in values)
+        #print mean and standard deviation
+        print(f"{model} weeks: {week_values}  mean: {values.mean():.2f}  std: {values.std():.2f}")
+
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     df = load_results()
+    #Generating graphs in the analysis_results/ directory 
     plot_pass_rates(df, "PassedBase", "Base tests passed(%)", "HumanEval Base pass rate by model/week", "base_pass_rate_by_week.png")
     plot_pass_rates(df, "PassedPlus", "Plus tests passed(%)", "HumanEval Plus pass rate by model/week", "plus_pass_rate_by_week.png")
     df = count_lines_of_code(df)
     plot_average_loc(df)
+
+    #Print some stats for anlysis
+    print("Base pass rate (%)")
+    print_weekly_stats(df, "PassedBase")
+    print("Plus pass rate (%)")
+    print_weekly_stats(df, "PassedPlus")
+    print("Average lines of code")
+    print_weekly_stats(df, "LinesOfCode")
 
 if __name__ == "__main__":
     main()
