@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# Runs EvalPlus base + plus tests on every model's solutions in a results folder.
-# Expects a folder containing ChatGPT, Claude, and Gemini subfolders, each holding
-# files named HumanEval_<task>_<run>.py (for example, HumanEval_140_3.py).
-#
 # For each model it builds an EvalPlus samples.jsonl and evaluates it using evalplus. 
 # Output: <folder>/eval_summary.csv                        
 #

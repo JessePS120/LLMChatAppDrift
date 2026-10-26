@@ -27,3 +27,6 @@ desktop.ini
 
 #Get rid of generated prompts 
 prompts/*
+
+#Get rid of any generated anylsis grahs 
+analysis_results/
