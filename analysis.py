@@ -93,7 +93,7 @@ def print_weekly_stats(df, column):
     for model, values in weekly.iterrows():
         week_values = ", ".join(f"{value:.1f}" for value in values)
         #print mean and standard deviation
-        print(f"{model} weeks: {week_values}  mean: {values.mean():.2f}  std: {values.std():.2f}")
+        print(f"{model} weeks: {week_values}  mean: {values.mean():.3f}  std: {values.std():.3f}")
 
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
