@@ -1,0 +1,9 @@
+def compare_one(a, b):
+    x = float(str(a).replace(",", "."))
+    y = float(str(b).replace(",", "."))
+
+    if x > y:
+        return a
+    elif y > x:
+        return b
+    return None
